@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This is a cool narrative written by Hank.
+This is a cool narrative written by Hank. Hank is the coolest.
 
 ```{r}
 x <- 1:100
