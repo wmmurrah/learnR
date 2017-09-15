@@ -9,6 +9,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse, warn.conflicts = FALSE)
 ```
 
 This is a cool narrative written by Hank. Hank is the coolest.
@@ -16,6 +17,7 @@ This is a cool narrative written by Hank. Hank is the coolest.
 ```{r}
 x <- 1:100
 y <- x^2
-plot(x, y, type = "l")
+d <- data.frame(x, y)
+ggplot(d, aes(x, y)) + geom_line()
 ```
 
