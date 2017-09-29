@@ -1,0 +1,68 @@
+---
+title: "Learn Tables"
+author: "William Murrah"
+date: "September 29, 2017"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+knitr::opts_knit$set(root.dir = "../../../")
+
+library(pander)
+library(ztable)
+library(psych)
+library(tidyverse)
+library(texreg)
+options(ztable.type="latex")
+```
+
+# Introduction
+
+This report uses the Iris data to learn about tables in R Markdown.
+
+```{r data, echo=FALSE}
+data("iris")
+pander(headTail(iris, 6, 6))
+```
+
+
+```{r boxplot1}
+ggplot(iris, aes(x = Species, y = Sepal.Length)) + geom_boxplot() +
+  ggtitle("Boxplot of Cool Variables")
+```
+
+\newpage
+
+```{r descriptives}
+pander(describe(iris[ ,-5], fast = T), caption = "Numeric Variables")
+```
+
+```{r}
+pander(table(iris$Species), caption = "Categorical Variable")
+```
+
+
+```{r ztable-numeric, results='asis'}
+ztable(headTail(iris, 6, 6))
+```
+
+
+```{r ztable-factor, results='asis'}
+ztable(describe(iris, fast = T))
+```
+
+```{r model, results='asis'}
+mod <- lm(Sepal.Length ~ Species, iris)
+mod1 <- update(mod, . ~ . + Sepal.Width)
+texreg(list(mod, mod1), float.pos = 'h')
+```
+
+
+```{r}
+pander(mod)
+```
+
